@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+#card {
+  background: url("/public/images/my.jpg");
+}
+
+#search {
+  background: url("/public/images/search.svg");
+  background-repeat: no-repeat;
+}
+
+#home {
+  background: url("/public/images/home.svg");
+}
+
+#clipboard {
+  background: url("/public/images/clipboard.svg");
+}
+
+#add {
+  background: url("/public/images/add.svg");
+}
+
+#edit {
+  background: url("/public/images/edit.svg");
+}
+
+#logout {
+  background: url("/public/images/logout.svg");
+  background-repeat: no-repeat;
+}
+
+#gambar {
+  background: url("/public/images/gambar.svg");
+  background-repeat: no-repeat;
+}
+
+#detail-bg {
+  background: url("/public/images/detail.jpg");
+  background-size: cover;
+}
+
+#back {
+  background: url("/public/images/back.svg");
+  background-repeat: no-repeat;
+}
+
+#location {
+  background: url("/public/images/location.svg");
+  background-repeat: no-repeat;
+}
+
+#message {
+  background: url("/public/images/massage.svg");
+  background-repeat: no-repeat;
+}
+
+#phone {
+  background: url("/public/images/phone.svg");
+  background-repeat: no-repeat;
+}
+
+.active .icon {
+  color: blue;
+}
+
+
+
+
