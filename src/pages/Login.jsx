@@ -14,39 +14,50 @@ const Login = () => {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (email === "" || password === "") {
-      return false;
-    }
-    let data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "https://frontendreq.pondokprogrammer.com/api/login",
-      headers: {},
-      data: data,
-    };
-
-    axios
-      .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        if (response.data.token) {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("namaUser", response.data.user.name)
-          navigate("/dashboard");
-        } else {
-          alert("Email atau Password salah!?");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  if (email === "" || password === "") {
+    alert("Email dan Password harus diisi!");
+    return;
   }
+
+  const data = new FormData();
+  data.append("email", email);
+  data.append("password", password);
+
+  const config = {
+    method: "post",
+    url: "https://frontendreq.pondokprogrammer.com/api/login",
+    data: data,
+  };
+
+  axios(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("namaUser", response.data.user.name);
+        navigate("/dashboard");
+      } else {
+        alert("Email atau Password salah!");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      if (error.response) {
+        // Handling HTTP errors from the server
+        const { data, status } = error.response;
+        if (status === 401) {
+          alert(data.message);
+        } else {
+          alert(`Terjadi kesalahan: ${data.message}`);
+        }
+      } else {
+        // Handling network errors
+        alert("Terjadi kesalahan jaringan. Mohon cek koneksi internet Anda.");
+      }
+    });
+}
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex justify-center items-center h-screen">

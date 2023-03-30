@@ -7,6 +7,11 @@ import { RxPencil2 } from "react-icons/rx";
 import { HiOutlineLogout } from "react-icons/hi";
 import { TfiClose } from "react-icons/tfi"
 
+const logOut = () => {
+  localStorage.removeItem("token")
+  localStorage.removeItem("namaUser")
+}
+
 const Sidebar = () => {
   
   const [show, setShow] = useState(false)
@@ -22,7 +27,7 @@ const Sidebar = () => {
       </NavLink>
 
       <NavLink
-        to="/tabel"
+        to="/tabel/:id"
         className="text-[50px] text-[#292D32] hover:text-[#0038FF] mt-20 hover:scale-105 duration-200"
       >
         <BsClipboardCheck className="icon" />
@@ -33,12 +38,12 @@ const Sidebar = () => {
       >
         <AiOutlineFolderAdd className="icon" />
       </NavLink>
-      <NavLink
-        to="/ubahwisata"
+      {/* <NavLink
+        to="/updatewisata"
         className="text-[50px] text-[#292D32] hover:text-[#0038FF] mt-20 hover:scale-105 duration-200"
       >
         <RxPencil2 className="icon" />
-      </NavLink>
+      </NavLink> */}
       <div className="w-[40.36px] h-[48px] top-[739px] left-[43px] absolute ">
         <NavLink
           to="#"
@@ -71,7 +76,10 @@ const Sidebar = () => {
                 >
                   Batal
                 </NavLink>
-                <NavLink to='/' className="w-[303px] h-[75px]  bg-[#6889ff] hover:bg-[#3D62E6] text-[24px] text-center px-[121] py-[20px] font-extrabold rounded-[12px] text-[#FFFFFF]">
+                <NavLink 
+                to='/' 
+                onClick={logOut}
+                className="w-[303px] h-[75px]  bg-[#6889ff] hover:bg-[#3D62E6] text-[24px] text-center px-[121] py-[20px] font-extrabold rounded-[12px] text-[#FFFFFF]">
                   Logout
                 </NavLink>
               </div>

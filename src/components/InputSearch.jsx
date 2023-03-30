@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputSearch = () => {
+const InputSearch = ({ value, onChange }) => {
   return (
     <div className="flex flex-row justify-between items-center w-[614px] h-[77px] rounded-[36px] bg-[#F6F6F6] gap-3 shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)]">
     <span
@@ -10,7 +10,9 @@ const InputSearch = () => {
     <input
       id="cari"
       type="text"
+      value={value}
       placeholder="Cari wisata..."
+      onChange={(e) => onChange(e.target.value)}
       className="w-[614px] h-[77px] border-none outline-none font-normal bg-[#F6F6F6] text-[24px] font-Inter rounded-[36px] text-black placeholder:text-[#515151]"
     />
     <button className="w-[200px] h-[77px] rounded-[36px] bg-[#6889FF] font-Inter font-bold drop-shadow-2xl  text-[24px] text-[#FFFFFF] not-italic hover:bg-[#3D62E5] active:opacity-[0.8]">
