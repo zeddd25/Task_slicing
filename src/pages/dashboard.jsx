@@ -1,9 +1,10 @@
 import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import InputSearch from "../components/InputSearch";
 import instance from "../api";
+import { HiMenuAlt2 } from "react-icons/hi";
 
 const Dashboard = () => {
   // <==========================> //
@@ -14,8 +15,46 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const ref = useRef(null);
 
-  // <===============================================> //
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowSidebar(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
+  const handleToggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+    setIsSidebarOpen(!isSidebarOpen);
+    if (isSidebarOpen) {
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowSidebar(false);
+        setIsSidebarOpen(true);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
   useEffect(() => {
     const checkUserToken = () => {
       const userToken = localStorage.getItem("token");
@@ -72,50 +111,64 @@ const Dashboard = () => {
 
     // <==========================================================================================> //
     return (
-      <div>
-        <nav className="w-[125px] h-screen absolute flex justify-center items-center">
-          <Sidebar />
-        </nav>
-        <div className="absolute left-[278px] top-[80px]">
-          <h1 className="font-Inter capitalize font-bold text-[36px] leading-[50px] pl-[50px] mb-[54px]">
-            Hi, {namaUser}
+      <>
+        <div className="w-full" ref={ref}>
+          <nav
+            className={`w-full h-full fixed justify-center items-center md:justify-start md:w-[125px] md:items-center md:flex lg:h-[828px] ${
+              showSidebar ? "" : "hidden"
+            }`}
+          >
+            <Sidebar onClick={() => setShowSidebar(false)} />
+          </nav>
+        <div className="w-full h-[84px] bg-[#FFFFFF] flex justify-between px-3 items-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:hidden">
+          <NavLink onClick={handleToggleSidebar}>
+            <h1 className="text-[46px] text-[#515151] flex items-center">
+              <HiMenuAlt2 />
+            </h1>
+          </NavLink>
+          <h1 className="capitalize font-bold text-[32px] leading-[50px]">
+            Hi, {namaUser}!
           </h1>
         </div>
-        <header className="flex justify-end mr-[80px] p-5">
-          <InputSearch value={searchQuery} onChange={setSearchQuery} />
-        </header>
-        <main className="ml-[220px] flex-col flex justify-end mt-[62px]">
-          {searchResult.length > 0 ? (
-            <div className="w-full flex justify-center flex-wrap mr-[100px] gap-x-[92px] gap-y-[42px] ">
-              {searchResult.map((item) => {
-                return (
-                  <NavLink to={`/detail/${item.id}`}>
-                    <Card
-                      key={item.id}
-                      src={item.photo}
-                      nama={item.name}
-                      address={item.address}
-                      city={item.city}
-                      phone={item.phone}
-                    />
-                  </NavLink>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="flex justify-center items-center w-full h-full font-poppins text-[36px] text-gray-500">
-            <p>No results found</p>
-            </div>
-          )}
-        </main>
-        <footer className="w-full bg-[#6889FF]  h-[160px] flex justify-center items-center mt-[195px]">
-          <p className="text-center font-poppins text-[#FFFFFF] text-[20px] ">
-            Footer Component
-            <br />
-            Copyright 2023 AII right reserved
-          </p>
-        </footer>
-      </div>
+          <header className="p-5 sm:flex sm:justify-center sm:w-full sm:items-center">
+            <h1 className="capitalize font-bold text-[32px] leading-[50px] hidden md:block sm:pr-20 sm:w-full md:pl-32 md:pt-10 lg:pl-80">
+              Hi, {namaUser}!
+            </h1>
+            <InputSearch value={searchQuery} onChange={setSearchQuery} />
+          </header>
+          <main className="flex w-full justify-center md:justify-end">
+            {searchResult.length > 0 ? (
+              <div className="w-full  flex justify-center flex-wrap gap-y-[42px] mx-6 sm:gap-x-4 md:w-[84%] md:mx-2 lg:w-[90%]">
+                {searchResult.map((item) => {
+                  return (
+                    <NavLink to={`/detail/${item.id}`}>
+                      <Card
+                        key={item.id}
+                        src={item.photo}
+                        nama={item.name}
+                        address={item.address}
+                        city={item.city}
+                        phone={item.phone}
+                        />
+                    </NavLink>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="flex justify-center items-center w-full h-screen font-poppins text-[36px] text-gray-500">
+                <p>Hah?, Kosong &#128565;</p>
+              </div>
+            )}
+          </main>
+          <footer className="bg-[#6889FF] w-full h-[100px] flex justify-center items-center mt-[300px]">
+            <p className="text-center font-poppins text-[#FFFFFF] text-[20px]">
+              Footer Component
+              <br />
+              Copyright 2023 AII right reserved
+            </p>
+          </footer>
+          </div>
+      </>
     );
   }
 };

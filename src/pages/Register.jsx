@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Rectangle from "../components/Rectangle";
-import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import instance from "../api";
 
 const Register = () => {
   const [nama, setNama] = useState("");
@@ -32,12 +31,12 @@ const Register = () => {
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "https://frontendreq.pondokprogrammer.com/api/register",
+        url: "/register",
         headers: {},
         data: data,
       };
 
-      axios
+      instance
         .request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
@@ -51,22 +50,19 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex justify-center items-center h-screen">
-        <div className="flex justify-center">
-          <div className="absolute w-[165px] h-[48px] top-[170px] mx-[233px] font-sans not-italic font-bold text-[40px] leading-[48.41px] text-[#6889FF]">
-            <h1>Register</h1>
-          </div>
-          <div>
-            <Rectangle />
-          </div>
-          <div className="flex justify-center flex-col absolute top-[260px] gap-5">
+      <div className="flex justify-center items-center h-full">
+        <div className="max-w-md mx-4 md:max-w-md flex justify-center items-center h-screen">
+          <div className="max-w-md px-5 w-full flex justify-end items-center pb-10 flex-col gap-y-4 h-[700px] rounded-[12px] bg-[#FFFFFF] shadow-2xl">
+            <h1 className="font-sans not-italic font-bold text-[40px] mb-5 text-[#6889FF]">
+              Register
+            </h1>
             <input
               type="text"
               placeholder="Masukan Nama"
               value={nama}
               onChange={(e) => setNama(e.target.value)}
               required
-              className="w-[418px] h-[75px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF] left-[0%] right-[0%] top-[0%] bottom-[0%]"
+              className="w-full h-[50px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF]"
             />
             <input
               type="text"
@@ -74,7 +70,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-[418px] h-[75px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF] left-[0%] right-[0%] top-[0%] bottom-[0%]"
+              className="w-full h-[50px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF]"
             />
             <input
               type="password"
@@ -82,27 +78,30 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-[418px] h-[75px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF] left-[0%] right-[0%] top-[0%] bottom-[0%]"
+              className="w-full h-[50px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF]"
             />
             <input
               type="password"
-              placeholder="Masukan Konfirmasi Password"
+              placeholder="Konfirmasi Password"
               value={password_confirmation}
               onChange={(e) => setPassword_confirmation(e.target.value)}
               required
-              className="w-[418px] h-[75px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF] left-[0%] right-[0%] top-[0%] bottom-[0%]"
+              className="w-full h-[50px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF]"
             />
-          </div>
-          <div className="flex justify-center absolute top-[670px]">
-            <Button />
-          </div>
-          <div className="absolute w-[256px] h-[24px] top-[755px] mr-[110px] font-Inter not-italic font-normal text-[20px] leading-[24px] text-[#000000]">
-            <h1>
-              Sudah memiliki akun,{" "}
-              <Link to="/" className="text-[#0038FF]">
-                Login
-              </Link>
-            </h1>
+            <button
+              type="submit"
+              className="w-full h-[72px] font-Inter font-bold text-[24px] mx-8 rounded-[12px] text-[#FFFFFF] bg-[#6889FF] hover:bg-[#3D62E5] active:opacity-[0.8] border-none"
+            >
+              Register
+            </button>
+            <div className=" flex flex-col justify-start w-full px-4 font-Inter not-italic font-normal text-[20px] leading-[24px] text-[#000000]">
+              <h1>
+                Sudah memiliki akun,{" "}
+                <Link to="/" className="text-[#0038FF]">
+                  Login
+                </Link>
+              </h1>
+            </div>
           </div>
         </div>
       </div>

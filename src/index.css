@@ -86,7 +86,7 @@
 .jimu-primary-loading:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 
 .jimu-primary-loading:before {
@@ -120,11 +120,10 @@
 }
 
 @-webkit-keyframes loading-keys-app-loading {
-
   0%,
   80%,
   100% {
-    opacity: .75;
+    opacity: 0.75;
     box-shadow: 0 0 #076fe5;
     height: 32px;
   }
@@ -137,11 +136,10 @@
 }
 
 @keyframes loading-keys-app-loading {
-
   0%,
   80%,
   100% {
-    opacity: .75;
+    opacity: 0.75;
     box-shadow: 0 0 #076fe5;
     height: 32px;
   }
@@ -152,7 +150,41 @@
     height: 40px;
   }
 }
- 
 
+table {
+  min-width: 1101px;
+}
 
+.table-container {
+  max-height: 800;
+  overflow-x: scroll;
+}
 
+/* Lebar dan Warna Scroll */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 26px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e8e8e8;
+}
+
+/* Animasi saat Scroll */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+@media only screen and (min-width: 1024px) {
+  table {
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #ffffff;
+  }
+}

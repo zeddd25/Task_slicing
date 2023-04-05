@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
 import InputAlamat from "../components/InputAlamat";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BiImageAdd } from "react-icons/bi";
 import { useParams } from "react-router-dom";
+import { HiMenuAlt2 } from "react-icons/hi";
+import instance from "../api";
 
 const UpdateWisata = () => {
   // State untuk mengubah status button
@@ -23,7 +25,46 @@ const UpdateWisata = () => {
   const [city, setCity] = useState("");
   const [photo, setPhoto] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [data, setData] = useState("")
+  const [data, setData] = useState("");
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowSidebar(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
+  const handleToggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+    setIsSidebarOpen(!isSidebarOpen);
+    if (isSidebarOpen) {
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowSidebar(false);
+        setIsSidebarOpen(true);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -101,33 +142,33 @@ const UpdateWisata = () => {
       let config = {
         method: "get",
         maxBodyLength: Infinity,
-        url: `https://frontendreq.pondokprogrammer.com/api/show/${id}`,
+        url: `/show/${id}`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")} `,
         },
       };
 
-      axios
-      .request(config)
-      .then((response) => {
-        setLoading(false);
-        setName(response.data.data[0].name);
-        setEmail(response.data.data[0].email);
-        setPhone(response.data.data[0].phone);
-        setCity(response.data.data[0].city);
-        setAddress(response.data.data[0].address);
-        setImage(response.data.data[0].photo)
-        fetch(response.data.data[0].photo)
-        .then((response) => response.blob())
-        .then((res) => {
-        const file = new File([res], 'image', { type : res.type,})
-        setPhoto(file)
+      instance
+        .request(config)
+        .then((response) => {
+          setLoading(false);
+          setName(response.data.data[0].name);
+          setEmail(response.data.data[0].email);
+          setPhone(response.data.data[0].phone);
+          setCity(response.data.data[0].city);
+          setAddress(response.data.data[0].address);
+          setImage(response.data.data[0].photo);
+          fetch(response.data.data[0].photo)
+            .then((response) => response.blob())
+            .then((res) => {
+              const file = new File([res], "image", { type: res.type });
+              setPhoto(file);
+            });
         })
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
     };
     getData();
   }, []);
@@ -139,79 +180,84 @@ const UpdateWisata = () => {
       </div>
     );
   } else {
+    const namaUser = localStorage.getItem("namaUser");
+
     return (
-      <div>
-        <div className="w-[125px] h-screen absolute flex justify-center items-center ">
-          <Sidebar />
-        </div>
+      <div ref={ref}>
+        <nav
+          className={`w-full h-full fixed justify-center items-center md:w-[125px] md:block md:pt-20 ${
+            showSidebar ? "" : "hidden"
+          }`}
+        >
+          <Sidebar onClick={() => setShowSidebar(false)} />
+        </nav>
         {errorMessage && <div>{errorMessage}</div>}
         <form
           // Panggil fungsi handleSubmit dengan onSubmit
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-row justify-center items-center h-screen gap-[99px] mt-auto">
-            <div className="flex justify-center items-center h-screen">
-              <div className="absolute top-[110px] left-[435px] font-sans not-italic font-bold text-[40px] leading-[48.41px] text-[#6889FF]">
-                <h1>Ubah Wisata</h1>
-              </div>
-              <div className="flex justify-center items-center flex-col gap-y-[63px] h-[690px] mt-12 flex-wrap">
-                <Input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={handleNameChange}
-                  placeholder="Masukan Nama Wisata"
-                />
-                <Input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="Masukan Email"
-                />
-                <Input
-                  type="tel"
-                  id="tel"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  placeholder="Masukan No.Telepon"
-                />
-                <Input
-                  type="text"
-                  id="city"
-                  value={city}
-                  onChange={handleCityChange}
-                  placeholder="Masukan Kota"
-                />
-              </div>
+          <div className="flex justify-between items-center h-[84px] px-4 bg-[#FFFFFF] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:hidden">
+            <NavLink onClick={handleToggleSidebar}>
+              <h1 className="text-[46px] text-[#515151] w-[49px] h-[5px] flex items-center ">
+                <HiMenuAlt2 />
+              </h1>
+            </NavLink>
+            <h1 className="font-Inter capitalize font-bold text-[36px] leading-[50px]">
+              Hi, {namaUser}
+            </h1>
+          </div>
+          <div className="flex justify-center h-full gap-2 items-center flex-wrap mt-7 md:w-full md:mt-0 md:pl-24 lg:hidden">
+            <div className="font-sans not-italic font-bold text-[30px] justify-center w-full mx-4 md:mt-5 md:mb-4 md:text-[40px] leading-[48.41px] text-[#6889FF] md:w-[565px]">
+              <h1>Ubah Wisata</h1>
             </div>
-            <div className="flex flex-col  justify-end flex-wrap items-center gap-y-[34px] h-[790px]">
-              <InputAlamat
-                type="text"
-                id="address"
-                value={address}
-                onChange={handleAddressChange}
-                placeholder="Masukan Alamat"
-              />
+            <Input
+              type="text"
+              id="name"
+              value={name}
+              onChange={handleNameChange}
+              placeholder="Masukan Nama Wisata"
+            />
+            <Input
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Masukan Email"
+            />
+            <Input
+              type="tel"
+              id="tel"
+              value={phone}
+              onChange={handlePhoneChange}
+              placeholder="Masukan No.Telepon"
+            />
+            <Input
+              type="text"
+              id="city"
+              value={city}
+              onChange={handleCityChange}
+              placeholder="Masukan Kota"
+            />
+            <InputAlamat
+              type="text"
+              id="address"
+              value={address}
+              onChange={handleAddressChange}
+              placeholder="Masukan Alamat"
+            />
+            <div className="w-full mx-4 md:w-[565px]">
               <label
                 htmlFor="tambah"
-                className="flex flex-col justify-center items-center cursor-pointer h-[367px] w-[538px] rounded-xl bg-[#F6F6F6]"
+                className="flex flex-col justify-center items-center "
               >
-                <BiImageAdd className="text-[150px] text-[#6889FF]" />
-                <div className="flex flex-col justify-center items-center opacity-100">
-                  <input
-                    id="tambah"
-                    type="file"
-                    hidden
-                    onChange={fileChangeHandler}
-                  />
+                <div className="w-full object-cover mx-4 md:w-[565px]">
                   {image ? (
-                    <div className="w-[538px] h-[367px] overflow-hidden ">
+                    <div className="overflow-hidden">
                       <img
                         src={image}
                         alt="Gambar Wisata"
                         id="photo"
-                        className="h-full w-full"
+                        className="w-full rounded-[12px]"
                         onClick={() => {
                           document.querySelector("#input-file").click();
                         }}
@@ -223,7 +269,7 @@ const UpdateWisata = () => {
                         document.querySelector("#input-file").click();
                       }}
                     >
-                      <div className="flex flex-col justify-center items-center w-[538px] h-[367px] bg-[#F6F6F6] cursor-pointer">
+                      <div className="flex h-[280px] w-full flex-col rounded-[12px] justify-center items-center bg-[#F6F6F6] cursor-pointer">
                         <BiImageAdd className="text-[150px] text-[#6889FF]" />
                         <h1 className="font-Inter text-[24px] text-[#515151]">
                           Tambahkan Gambar
@@ -231,15 +277,114 @@ const UpdateWisata = () => {
                       </div>
                     </div>
                   )}
+                  <input
+                    id="tambah"
+                    type="file"
+                    hidden
+                    onChange={fileChangeHandler}
+                  />
                 </div>
               </label>
-
-              <button
-                type="submit"
-                className="w-[418px] h-[75px] font-Inter font-bold text-[24px] rounded-[12px] text-[#FFFFFF] bg-[#6889FF] hover:bg-[#3D62E5] active:opacity-[0.8] border-none"
+            </div>
+            <button
+              type="submit"
+              className="w-full h-[75px] mx-4 font-Inter font-bold text-[24px] rounded-[12px] text-[#FFFFFF] bg-[#6889FF] hover:bg-[#3D62E5] active:opacity-[0.8] border-none md:w-[565px]"
+            >
+              {buttonStatus}
+            </button>
+          </div>
+        </form>
+        <form
+          // Panggil fungsi handleSubmit dengan onSubmit
+          onSubmit={handleSubmit}
+        >
+          <div className="lg:flex lg:flex-row lg:justify-center lg:items-center lg:h-screen lg:gap-[60px] lg:mt-auto md:pl-20">
+            <div className="lg:flex lg:justify-center lg:items-center lg:h-screen hidden">
+              <div className="lg:flex lg:justify-center lg:items-center lg:flex-col lg:gap-y-[54px] lg:h-[690px] lg:mt-[80px] lg:flex-wrap lg:mb-[100px]">
+                <h1 className="lg:font-sans lg:not-italic lg:font-bold lg:text-[40px] lg:leading-[48.41px] lg:text-[#6889FF]">
+                  Ubah Wisata
+                </h1>
+                <Input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Masukan Nama Wisata"
+                  required
+                />
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Masukan Email"
+                  required
+                />
+                <Input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Masukan No.Telepon"
+                  required
+                />
+                <Input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Masukan Kota"
+                  required
+                />
+              </div>
+            </div>
+            <div className="lg:flex lg:justify-center lg:items-center lg:h-full hidden">
+              <label
+                htmlFor="tambah"
+                className="flex flex-col justify-center items-center "
               >
-                {buttonStatus}
-              </button>
+                <div className="lg:flex lg:flex-col lg:justify-end lg:flex-wrap lg:items-center lg:gap-y-[34px] lg:h-[780px] hidden">
+                  <InputAlamat
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Masukan Alamat"
+                  />
+                  {image ? (
+                    <div className="lg:w-[538px] lg:h-[367px] lg:overflow-hidden ">
+                      <img
+                        src={image}
+                        alt=""
+                        className="lg:h-full lg:w-full lg:rounded-[12px]"
+                        onClick={() => {
+                          document.querySelector("#input-file").click();
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        document.querySelector("#input-file").click();
+                      }}
+                    >
+                      <div className="lg:flex lg:flex-col lg:justify-center lg:items-center lg:rounded-[12px] lg:w-[538px] lg:h-[367px] lg:bg-[#F6F6F6] lg:cursor-pointer">
+                        <BiImageAdd className="lg:text-[150px] lg:text-[#6889FF]" />
+                        <h1 className="lg:font-Inter lg:text-[24px] lg:text-[#515151]">
+                          Tambahkan Gambar
+                        </h1>
+                      </div>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    id="input-file"
+                    onChange={fileChangeHandler}
+                    hidden
+                  />
+                  <button
+                    type="submit"
+                    className="lg:w-[418px] lg:h-[75px] lg:font-Inter lg:rounded-[12px] lg:font-bold lg:text-[24px] lg:rounded-[12px]lg: text-[#FFFFFF] lg:bg-[#6889FF] lg:hover:bg-[#3D62E5] lg:active:opacity-[0.8] lg:border-none"
+                  >
+                    {buttonStatus}
+                  </button>
+                </div>
+              </label>
             </div>
           </div>
         </form>

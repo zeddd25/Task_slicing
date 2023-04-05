@@ -2,7 +2,7 @@ import React from "react";
 
 const InputCheckbox = () => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 ">
       <input
         type="checkbox"
         className="w-[21px] h-[20px] cursor-pointer focus-visible: border-none outline-none bg-[#D9D9D9]"
