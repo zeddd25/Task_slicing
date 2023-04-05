@@ -156,7 +156,7 @@ const Table = () => {
           <h1>Tabel Wisata</h1>
         </div>
         <div className="flex justify-center items-center md:pl-14">
-          <div className="rounded-[20px] w-[84%] h-full table-container">
+          <div className="rounded-[20px] w-[84%] h-full table-container p-[20px]">
             <table className="w-full rounded-t-[20px] bg-[#E7EAF9] mt-2">
               <thead className="bg-[#E7EAF0] h-[83.97px] font-poppins">
                 <tr>
