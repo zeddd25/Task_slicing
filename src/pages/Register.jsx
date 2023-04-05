@@ -75,7 +75,7 @@ const Register = () => {
                 className="w-full h-[50px] border-none rounded-[12px] font-normal p-10 bg-[#F6F6F6] text-[24px] font-Inter text-black placeholder:text-[#515151] outline-[#6889FF]"
               />
               <input
-                type="text"
+                type="email"
                 placeholder="Masukan Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
