@@ -31,8 +31,8 @@ const UpdateWisata = () => {
   const ref = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
         setShowSidebar(false);
       }
     };
@@ -52,8 +52,8 @@ const UpdateWisata = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
         setShowSidebar(false);
         setIsSidebarOpen(true);
       }
@@ -66,24 +66,24 @@ const UpdateWisata = () => {
     };
   }, [ref]);
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
   };
 
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
   };
 
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
   };
 
   const fileChangeHandler = (e) => {
@@ -94,8 +94,8 @@ const UpdateWisata = () => {
     setImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     setButtonStatus("Sedang diubah...");
     if (!name || !email || !phone || !address || !city || !photo) {

@@ -7,11 +7,8 @@ import instance from "../api";
 import { HiMenuAlt2 } from "react-icons/hi";
 
 const Dashboard = () => {
-  // <==========================> //
   const navigate = useNavigate();
-  // <================================> //
   const [data, setData] = useState([]);
-  // <=========================================> //
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -65,7 +62,6 @@ const Dashboard = () => {
     };
   }, []);
 
-  // <==============================================> //
   useEffect(() => {
     setLoading(true);
     const getData = () => {
@@ -106,10 +102,8 @@ const Dashboard = () => {
       </div>
     );
   } else {
-    // <=============================================> //
     const namaUser = localStorage.getItem("namaUser");
 
-    // <==========================================================================================> //
     return (
       <>
         <div className="w-full" ref={ref}>
@@ -120,16 +114,16 @@ const Dashboard = () => {
           >
             <Sidebar onClick={() => setShowSidebar(false)} />
           </nav>
-        <div className="w-full h-[84px] bg-[#FFFFFF] flex justify-between px-3 items-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:hidden">
-          <NavLink onClick={handleToggleSidebar}>
-            <h1 className="text-[46px] text-[#515151] flex items-center">
-              <HiMenuAlt2 />
+          <div className="w-full h-[84px] bg-[#FFFFFF] flex justify-between px-3 items-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:hidden">
+            <NavLink onClick={handleToggleSidebar}>
+              <h1 className="text-[46px] text-[#515151] flex items-center">
+                <HiMenuAlt2 />
+              </h1>
+            </NavLink>
+            <h1 className="capitalize font-bold text-[32px] leading-[50px]">
+              Hi, {namaUser}!
             </h1>
-          </NavLink>
-          <h1 className="capitalize font-bold text-[32px] leading-[50px]">
-            Hi, {namaUser}!
-          </h1>
-        </div>
+          </div>
           <header className="p-5 sm:flex sm:justify-center sm:w-full sm:items-center">
             <h1 className="capitalize font-bold text-[32px] leading-[50px] hidden md:block sm:pr-20 sm:w-full md:pl-32 md:pt-10 lg:pl-80">
               Hi, {namaUser}!
@@ -149,7 +143,7 @@ const Dashboard = () => {
                         address={item.address}
                         city={item.city}
                         phone={item.phone}
-                        />
+                      />
                     </NavLink>
                   );
                 })}
@@ -167,7 +161,7 @@ const Dashboard = () => {
               Copyright 2023 AII right reserved
             </p>
           </footer>
-          </div>
+        </div>
       </>
     );
   }

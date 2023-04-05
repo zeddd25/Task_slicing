@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import instance from "../api";
 import Input from "../components/Input";
 import { BiImageAdd } from "react-icons/bi";
 import Sidebar from "../components/Sidebar";
-import { NavLink, useNavigate } from "react-router-dom";
-import InputAlamat from "../components/InputAlamat";
-import instance from "../api";
-import { IoIosArrowBack } from "react-icons/io";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { useEffect, useRef, useState } from "react";
+import InputAlamat from "../components/InputAlamat";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const TambahWisata = () => {
   // State untuk mengubah status button
@@ -48,7 +47,6 @@ const TambahWisata = () => {
         setIsSidebarOpen(true);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -75,6 +73,7 @@ const TambahWisata = () => {
   const handleSubmit = (e) => {
     // Agar tidak terjadi render ulang
     e.preventDefault();
+
     // Merubah status button ketika proses mengirim data
     setButtonStatus("Sedang ditambah...");
     if (!name || !email || !phone || !address || !city || !photo) {
@@ -82,6 +81,20 @@ const TambahWisata = () => {
       setButtonStatus("Tambah");
       return;
     }
+
+    if (photo.size > 3145728) {
+      // 3145728 byte = 3 MB
+      alert("Ukuran file gambar tidak boleh melebihi 3MB!");
+      setButtonStatus("Tambah");
+      return;
+    }
+
+    if (!["image/jpeg", "image/png"].includes(photo.type)) {
+      alert("Format file gambar harus JPG atau PNG!");
+      setButtonStatus("Tambah");
+      return;
+    }
+
     let data = new FormData();
     data.append("name", name);
     data.append("email", email);
@@ -116,7 +129,6 @@ const TambahWisata = () => {
         setButtonStatus("Create");
       });
   };
-
   if (loading) {
     return (
       <div className="loader">

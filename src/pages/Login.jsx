@@ -4,9 +4,7 @@ import { useState } from "react";
 import instance from "../api";
 
 const Login = () => {
-  // Email
   const [email, setEmail] = useState("");
-  // Password
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
@@ -44,7 +42,7 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
         if (error.response) {
-          // Handling HTTP errors from the server
+          // Menangani kesalahan HTTP dari server
           const { data, status } = error.response;
           if (status === 401) {
             alert(data.message);
@@ -52,7 +50,7 @@ const Login = () => {
             alert(`Terjadi kesalahan: ${data.message}`);
           }
         } else {
-          // Handling network errors
+          // Menangani kesalahan jaringan
           alert("Terjadi kesalahan jaringan. Mohon cek koneksi internet Anda.");
         }
       });

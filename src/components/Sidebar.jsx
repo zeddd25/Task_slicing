@@ -26,7 +26,7 @@ const Sidebar = ({onClick}) => {
 
   return (
     <>
-        <div className="w-[280px] h-full flex flex-col fixed pl-10 gap-y-10 bg-[#FFFFFF] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:w-[100px] md:h-[720px] md:justify-center md:items-center md:rounded-r-3xl md:pl-0 md:pt-10">
+        <div className="w-[250px] h-full flex flex-col fixed pl-10 gap-y-10 bg-[#FFFFFF] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:w-[100px] md:h-[720px] md:justify-center md:items-center md:rounded-r-3xl md:pl-0 md:pt-10">
           <h1 className="capitalize font-bold text-[36px] leading-[50px] mt-14 md:hidden">
               Hi, {namaUser}!
           </h1>

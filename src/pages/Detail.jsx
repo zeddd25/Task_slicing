@@ -6,14 +6,10 @@ import instance from "../api";
 
 const Detail = () => {
   const { id } = useParams();
-  // <==========================> //
   const navigate = useNavigate();
-  // <================================> //
   const [data, setData] = useState([]);
-  // <=========================================> //
   const [loading, setLoading] = useState(false);
 
-  // <===============================================> //
   useEffect(() => {
     const checkUserToken = () => {
       const userToken = localStorage.getItem("token");
@@ -24,7 +20,6 @@ const Detail = () => {
     };
   }, []);
 
-  // <==============================================> //
   useEffect(() => {
     setLoading(true);
     const getData = () => {
@@ -58,6 +53,7 @@ const Detail = () => {
       </div>
     );
   } else {
+    
     const namaUser = localStorage.getItem("namaUser");
 
     return (
@@ -78,16 +74,20 @@ const Detail = () => {
                   </h1>
                 </div>
                 <div className="font-Inter font-bold text-center text-[28px] text-[#000000] md:w-[536px] md:flex md:justify-start md:text-[32px] md:gap-20 lg:w-[1007px]">
-                    <NavLink
-                      to="/dashboard"
-                      className="text-5xl text-left text-[#515151] hover:scale-110 hidden md:block"
-                    >
-                      <IoIosArrowBack />
-                    </NavLink>
+                  <NavLink
+                    to="/dashboard"
+                    className="text-5xl text-left text-[#515151] hover:scale-110 hidden md:block"
+                  >
+                    <IoIosArrowBack />
+                  </NavLink>
                   <h1>{item.name}</h1>
                 </div>
                 <div className="mx-4 md:flex md:justify-center md:items-center">
-                  <img src={item.photo} alt="gambar wisata" className="rounded-md md:w-[536px] lg:w-[1007px]"/>
+                  <img
+                    src={item.photo}
+                    alt="gambar wisata"
+                    className="rounded-md md:w-[536px] lg:w-[1007px]"
+                  />
                 </div>
                 <div className="flex justify-start flex-row gap-4 h-[150px] mx-4 md:pr-64 lg:pr-[755px] lg:w-[1007px]">
                   <div className="w-[38px] flex flex-col gap-2">

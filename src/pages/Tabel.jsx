@@ -1,24 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import instance from "../api";
 import { GoTrashcan } from "react-icons/go";
 import { TfiPencil } from "react-icons/tfi";
-import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import Sidebar from "../components/Sidebar";
-import { NavLink, useNavigate } from "react-router-dom";
-import instance from "../api";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { useParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { MdOutlineReportGmailerrorred } from "react-icons/md";
 
 const Table = () => {
-  // <==========================> //
   const navigate = useNavigate();
-  // <================================> //
   const [data, setData] = useState([]);
-  // <=========================================> //
   const [loading, setLoading] = useState(false);
-  // <=========================================> //
-  const { id } = useParams(); // mendapatkan nilai id dari URL
-  // <===============================================> //
+  const { id } = useParams(); //
   const [showSidebar, setShowSidebar] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const ref = useRef(null);
@@ -69,7 +64,6 @@ const Table = () => {
     };
   }, []);
 
-  // <==============================================> //
   useEffect(() => {
     setLoading(true);
     const getData = () => {
@@ -128,7 +122,7 @@ const Table = () => {
       </div>
     );
   } else {
-    // <=============================================> //
+    
     const namaUser = localStorage.getItem("namaUser");
 
     return (
