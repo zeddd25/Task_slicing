@@ -162,7 +162,7 @@ const TambahWisata = () => {
             </h1>
           </div>
           <div className="flex justify-center h-full gap-2 items-center flex-wrap mt-7 md:w-full md:mt-0 md:pl-24 lg:hidden">
-            <div className="font-sans not-italic font-bold text-[30px] justify-center w-full mx-4 md:mt-5 md:mb-4 md:text-[40px] leading-[48.41px] text-[#6889FF] md:w-[565px]">
+            <div className="font-sans not-italic font-bold text-[35px] justify-center w-full mx-4 md:mt-5 md:mb-4 md:text-[40px]  text-[#6889FF] md:w-[565px]">
               <h1>Tambahkan Wisata</h1>
             </div>
             <Input
@@ -217,9 +217,9 @@ const TambahWisata = () => {
                     document.querySelector("#input-file").click();
                   }}
                 >
-                  <div className="flex h-[280px] w-full flex-col rounded-[12px] justify-center items-center bg-[#F6F6F6] cursor-pointer">
-                    <BiImageAdd className="text-[150px] text-[#6889FF]" />
-                    <h1 className="font-Inter text-[24px] text-[#515151]">
+                  <div className="flex h-[280px] w-full flex-col gap-[30px] rounded-[12px] justify-center items-center bg-[#F6F6F6] cursor-pointer">
+                    <i id="image"></i>
+                    <h1 className="text-[24px] text-[#515151]">
                       Tambahkan Gambar
                     </h1>
                   </div>
@@ -305,8 +305,8 @@ const TambahWisata = () => {
                       document.querySelector("#input-file").click();
                     }}
                   >
-                    <div className="lg:flex lg:flex-col lg:justify-center lg:items-center lg:rounded-[12px] lg:w-[538px] lg:h-[367px] lg:bg-[#F6F6F6] lg:cursor-pointer">
-                      <BiImageAdd className="lg:text-[150px] lg:text-[#6889FF]" />
+                    <div className="lg:flex lg:flex-col lg:justify-center lg:gap-5 lg:items-center lg:rounded-[12px] lg:w-[538px] lg:h-[367px] lg:bg-[#F6F6F6] lg:cursor-pointer">
+                      <i id="image"></i>
                       <h1 className="lg:font-Inter lg:text-[24px] lg:text-[#515151]">
                         Tambahkan Gambar
                       </h1>

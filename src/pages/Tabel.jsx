@@ -122,7 +122,7 @@ const Table = () => {
       </div>
     );
   } else {
-    
+
     const namaUser = localStorage.getItem("namaUser");
 
     return (
@@ -195,16 +195,16 @@ const Table = () => {
                     <td className="py-2 text-sm text-gray-500">
                       <span className="flex gap-2 justify-center text-[#16192C] text-[22px]">
                         <NavLink to={`/detail/${item.id}`}>
-                          <button className="flex justify-center items-center w-[44.55px] h-[51.23px] bg-[#FFFFFF] border-[1px] border-[#E8EBF0] rounded-[6px] text-yellow-400 hover:scale-105 hover:text-slate-500 active:opacity-[0.8]">
+                          <button className="flex justify-center items-center w-[44.55px] h-[51.23px] bg-[#FFFFFF] border-[1px] border-[#E8EBF0] rounded-[6px] text-yellow- hover:scale-105 hover:text-slate-500 active:opacity-[0.8]">
                             <MdOutlineReportGmailerrorred />
                           </button>
                         </NavLink>
                         <NavLink to={`/updateWisata/${item.id}`}>
-                          <button className="flex justify-center items-center w-[44.55px] h-[51.23px] bg-[#FFFFFF] border-[1px] border-[#E8EBF0] rounded-[6px] text-blue-400 hover:scale-105 hover:text-slate-500">
+                          <button className="flex justify-center items-center w-[44.55px] h-[51.23px] bg-[#FFFFFF] border-[1px] border-[#E8EBF0] rounded-[6px] text-blue- hover:scale-105 hover:text-slate-500">
                             <TfiPencil />
                           </button>
                         </NavLink>
-                        <button className="flex justify-center items-center w-[44.55px] h-[51.23px] bg-[#FFFFFF] border-[1px] border-[#E8EBF0] rounded-[6px] text-red-400 hover:scale-105 hover:text-slate-500">
+                        <button className="flex justify-center items-center w-[44.55px] h-[51.23px] bg-[#FFFFFF] border-[1px] border-[#E8EBF0] rounded-[6px] text-red- hover:scale-105 hover:text-slate-500">
                           <GoTrashcan onClick={() => handleDelete(item.id)} />
                         </button>
                       </span>

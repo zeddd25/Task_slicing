@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AiOutlineHome } from "react-icons/ai";
-import { BsClipboardCheck } from "react-icons/bs";
-import { AiOutlineFolderAdd } from "react-icons/ai";
+import { TbClipboardCheck, TbSquareRoundedArrowRight, TbSquareRoundedPlus } from "react-icons/tb";
 // import { RxPencil2 } from "react-icons/rx";
-import { HiOutlineLogout } from "react-icons/hi";
+import { TbHome } from "react-icons/tb";
 import { TfiClose } from "react-icons/tfi";
 
-const Sidebar = ({onClick}) => {
+const Sidebar = ({ onClick }) => {
   const logOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("namaUser");
@@ -26,48 +24,48 @@ const Sidebar = ({onClick}) => {
 
   return (
     <>
-        <div className="w-[250px] h-full flex flex-col fixed pl-10 gap-y-10 bg-[#FFFFFF] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:w-[100px] md:h-[720px] md:justify-center md:items-center md:rounded-r-3xl md:pl-0 md:pt-10">
-          <h1 className="capitalize font-bold text-[36px] leading-[50px] mt-14 md:hidden">
-              Hi, {namaUser}!
-          </h1>
-          <NavLink
-            to="/dashboard"
-            className="text-[50px] flex flex-row-reverse justify-end items-end gap-6 text-[#292D32] hover:text-[#0038FF] hover:scale-105 duration-200"
-          >
-            <p className="text-[26px] md:hidden">Beranda</p>
-            <AiOutlineHome className="icon" />
-          </NavLink>
-          <NavLink
-            to="/tabel/:id"
-            className="text-[50px] flex flex-row-reverse justify-end items-end gap-6 text-[#292D32] hover:text-[#0038FF] hover:scale-105 duration-200"
-          >
-            <p className="text-[26px] md:hidden">Tabel</p>
-            <BsClipboardCheck className="icon" />
-          </NavLink>
-          <NavLink
-            to="/tambahwisata"
-            className="text-[50px] flex flex-row-reverse justify-end items-end gap-6 text-[#292D32] hover:text-[#0038FF] hover:scale-105 duration-200"
-          >
-            <p className="text-[26px] md:hidden">Tambah</p>
-            <AiOutlineFolderAdd className="icon" />
-          </NavLink>
-          {/* <NavLink
+      <div className="w-[250px] h-full flex flex-col fixed pl-10 gap-y-10 bg-[#FFFFFF] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:w-[100px] md:h-[720px] md:justify-center md:items-center md:rounded-r-3xl md:pl-0 md:pt-10">
+        <h1 className="capitalize font-bold text-[30px] leading-[50px] mt-14 md:hidden">
+          Hi, {namaUser}!
+        </h1>
+        <NavLink
+          to="/dashboard"
+          className="flex flex-row-reverse justify-end items-end gap-6 text-[#292D32] hover:text-[#0038FF] hover:scale-105 duration-200"
+        >
+          <p className="text-[22px] md:hidden">Beranda</p>
+          <TbHome className="icon w-[50px] h-[50px]"/>
+        </NavLink>
+        <NavLink
+          to="/tabel/:id"
+          className=" flex flex-row-reverse justify-end items-end gap-6 text-[#292D32] hover:text-[#0038FF] hover:scale-105 duration-200"
+        >
+          <p className="text-[22px] md:hidden">Tabel</p>
+          <TbClipboardCheck className="icon w-[50px] h-[50px]"/>
+        </NavLink>
+        <NavLink
+          to="/tambahwisata"
+          className="flex flex-row-reverse justify-end items-end gap-6 text-[#292D32] hover:text-[#0038FF] hover:scale-105 duration-200"
+        >
+          <p className="text-[22px] md:hidden">Tambah</p>
+          <TbSquareRoundedPlus className="icon w-[50px] h-[50px]"/>
+        </NavLink>
+        {/* <NavLink
         to="/updatewisata"
         className="text-[50px] text-[#292D32] hover:text-[#0038FF] mt-20 hover:scale-105 duration-200"
       >
         <RxPencil2 className="icon" />
       </NavLink> */}
-          <NavLink
-            to="#"
-            onClick={() => setShow(true)}
-            className="text-[60px] flex flex-row-reverse justify-end items-center gap-4 mt-60 md:mt-80 text-[#444658] hover:text-[#0038FF]"
-          >
-            <p className="text-[26px] md:hidden">Keluar</p>
-            <HiOutlineLogout />
-          </NavLink>
-          <div></div>
-        </div>
-        {show ? (
+        <NavLink
+          to="#"
+          onClick={() => setShow(true)}
+          className="text-[58px] flex flex-row-reverse justify-end items-center gap-4 mt-60 md:mt-80 text-[#444658] hover:text-[#0038FF]"
+        >
+          <p className="text-[22px] md:hidden">Keluar</p>
+          <TbSquareRoundedArrowRight />
+        </NavLink>
+        <div></div>
+      </div>
+      {show ? (
         <div className="bg-black bg-opacity-50 w-screen flex h-screen items-center lg:h-[100vw]">
           <div className="z-10 w-full">
             <div className="h-screen flex justify-center items-center md:w-screen">
@@ -103,8 +101,11 @@ const Sidebar = ({onClick}) => {
             </div>
           </div>
         </div>
-        ) : null}
-      <div className=" bg-black -z-50 max-w-full h-full bg-opacity-50 md:hidden" onClick={onClick}></div>
+      ) : null}
+      <div
+        className="bg-black -z-50 max-w-full h-full bg-opacity-50 md:hidden"
+        onClick={onClick}
+      ></div>
     </>
   );
 };

@@ -1,5 +1,3 @@
-import React from "react";
-
 const InputAlamat = ({ type, placeholder, value, onChange, required,id }) => {
   return (
     <input

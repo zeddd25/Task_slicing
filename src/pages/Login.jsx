@@ -58,13 +58,12 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex justify-center items-center h-screen">
-        <div className=" max-w-md mx-4 md:max-w-md flex justify-center items-center">
-          <div className="max-w-md px-5 w-full flex justify-end items-center pb-10 flex-col gap-y-5 h-[610px] rounded-[12px] bg-[#FFFFFF] shadow-2xl">
-            <h1 className="font-sans not-italic font-bold text-[40px] leading-[48.41px] mb-10 text-[#6889FF]">
+          <div className="px-5 w-[350px] flex justify-end items-center pb-10 flex-col gap-y-5 h-[600px] rounded-[12px] bg-[#FFFFFF] shadow-2xl md:w-[466px] md:h-[717px]">
+            <h1 className="font-sans not-italic font-bold text-[40px] mb-10 md:mb-20 text-[#6889FF]">
               Login
             </h1>
             <input
-              type="text"
+              type="email"
               placeholder="Masukan Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -95,7 +94,6 @@ const Login = () => {
               </h1>
             </div>
           </div>
-        </div>
       </div>
     </form>
   );

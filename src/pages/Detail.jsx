@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
 import instance from "../api";
+import { TbChevronLeft } from "react-icons/tb";
 
 const Detail = () => {
   const { id } = useParams();
@@ -67,7 +67,7 @@ const Detail = () => {
                     to="/dashboard"
                     className="text-5xl text-[#515151] hover:scale-110"
                   >
-                    <IoIosArrowBack />
+                    <TbChevronLeft />
                   </NavLink>
                   <h1 className="font-Inter capitalize font-bold text-[36px] leading-[50px]">
                     Hi, {namaUser}
@@ -78,7 +78,7 @@ const Detail = () => {
                     to="/dashboard"
                     className="text-5xl text-left text-[#515151] hover:scale-110 hidden md:block"
                   >
-                    <IoIosArrowBack />
+                    <TbChevronLeft />
                   </NavLink>
                   <h1>{item.name}</h1>
                 </div>

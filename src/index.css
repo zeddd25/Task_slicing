@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
   margin: 0px;
@@ -37,12 +36,48 @@
 
 #logout {
   background: url("/public/images/logout.svg");
+  width: 45px;
+  height: 50px;
   background-repeat: no-repeat;
 }
 
 #gambar {
   background: url("/public/images/gambar.svg");
   background-repeat: no-repeat;
+}
+#tabel {
+  background: url("../public/images/clipboard.svg");
+  width: 45px;
+  height: 45px;
+}
+
+.active #tabel path {
+  stroke: #076fe5;
+  stroke: #076fe5;
+  stroke: #076fe5;
+  stroke: #076fe5;
+  stroke: #076fe5;
+  stroke: #076fe5;
+}
+
+#add {
+  background: url("../public/images/add.svg");
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+}
+/* .home-svg {
+  fill: none;
+} */
+
+.active .home-svg:hover path {
+  stroke: blue;
+}
+
+#image {
+  background: url("../public/images/addimage.svg");
+  width: 100px;
+  height: 100px;
 }
 
 #detail-bg {

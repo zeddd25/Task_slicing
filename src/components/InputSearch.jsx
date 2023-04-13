@@ -1,5 +1,3 @@
-import React from 'react'
-
 const InputSearch = ({ value, onChange }) => {
   return (
     <div className="flex flex-row justify-between items-center h-[68px] rounded-[36px] bg-[#F6F6F6] gap-3 shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] sm:w-[500px] md:w-[800px]">

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import InputSearch from "../components/InputSearch";
 import instance from "../api";
-import { HiMenuAlt2 } from "react-icons/hi";
+import { TbAlignJustified } from "react-icons/tb";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ const Dashboard = () => {
     setShowSidebar(!showSidebar);
     setIsSidebarOpen(!isSidebarOpen);
     if (isSidebarOpen) {
+    localStorage.getItem("!namaUser");
     }
   };
 
@@ -117,12 +118,14 @@ const Dashboard = () => {
           <div className="w-full h-[84px] bg-[#FFFFFF] flex justify-between px-3 items-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] md:hidden">
             <NavLink onClick={handleToggleSidebar}>
               <h1 className="text-[46px] text-[#515151] flex items-center">
-                <HiMenuAlt2 />
+                <TbAlignJustified />
               </h1>
             </NavLink>
+            {isSidebarOpen && (
             <h1 className="capitalize font-bold text-[32px] leading-[50px]">
               Hi, {namaUser}!
             </h1>
+            )}
           </div>
           <header className="p-5 sm:flex sm:justify-center sm:w-full sm:items-center">
             <h1 className="capitalize font-bold text-[32px] leading-[50px] hidden md:block sm:pr-20 sm:w-full md:pl-32 md:pt-10 lg:pl-80">
@@ -132,7 +135,7 @@ const Dashboard = () => {
           </header>
           <main className="flex w-full justify-center md:justify-end">
             {searchResult.length > 0 ? (
-              <div className="w-full  flex justify-center flex-wrap gap-y-[42px] mx-6 sm:gap-x-4 md:w-[84%] md:mx-2 lg:w-[90%]">
+              <div className="w-full flex justify-center flex-wrap gap-y-[42px] mx-6 sm:gap-x-4 md:w-[84%] md:mx-2 lg:w-[90%]">
                 {searchResult.map((item) => {
                   return (
                     <NavLink to={`/detail/${item.id}`}>
@@ -150,11 +153,11 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="flex justify-center items-center w-full h-screen font-poppins text-[36px] text-gray-500">
-                <p>Hah?, Kosong &#128565;</p>
+                <p>Hasil pencarian tidak ada!</p>
               </div>
             )}
           </main>
-          <footer className="bg-[#6889FF] w-full h-[100px] flex justify-center items-center mt-[300px]">
+          <footer className="bg-[#6889FF] w-full h-[100px] flex justify-center items-center mt-[383px]">
             <p className="text-center font-poppins text-[#FFFFFF] text-[20px]">
               Footer Component
               <br />

@@ -61,9 +61,9 @@ const Register = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center h-full">
-          <div className="max-w-md mx-4 md:max-w-md flex justify-center items-center h-screen">
-            <div className="max-w-md px-5 w-full flex justify-end items-center pb-10 flex-col gap-y-4 h-[700px] rounded-[12px] bg-[#FFFFFF] shadow-2xl">
-              <h1 className="font-sans not-italic font-bold text-[40px] mb-5 text-[#6889FF]">
+          <div className="flex justify-center items-center h-screen">
+            <div className="px-5 w-[350px] flex items-center flex-col gap-y-4 h-[600px] rounded-[12px] bg-[#FFFFFF] shadow-2xl md:w-[466px] md:h-[717px]">
+              <h1 className="font-sans not-italic font-bold text-[40px] mt-5 md:pt-14 md:mt-0 text-[#6889FF]">
                 Register
               </h1>
               <input
@@ -106,8 +106,8 @@ const Register = () => {
               </button>
               <div className=" flex flex-col justify-start w-full px-4 font-Inter not-italic font-normal text-[20px] leading-[24px] text-[#000000]">
                 <h1>
-                  Sudah memiliki akun,{" "}
-                  <Link to="/" className="text-[#0038FF]">
+                  Sudah memiliki akun,
+                  <Link to="/" className="md:mt-5 text-[#0038FF]">
                     Login
                   </Link>
                 </h1>
